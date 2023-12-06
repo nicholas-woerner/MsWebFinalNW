@@ -1,0 +1,52 @@
+﻿@model DBVisualViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Database Visualizer</h1>
+</div>
+
+<div>
+    <h2>Books</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.Books)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <!-- Add more columns as needed -->
+                    <td>
+                        <!--  buttons for editing and deleting -->
+                        <a asp-controller="DBVisual" asp-action="Edit" asp-route-id="@book.BookId">Edit</a> |
+                        <a asp-controller="DBVisual" asp-action="Delete" asp-route-id="@book.BookId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Add a form for adding a new book -->
+<div>
+    <h2>Add New Book</h2>
+    <form asp-controller="DBVisual" asp-action="Create" method="post">
+        <!-- Add input fields for the new book -->
+        <div>
+            <label>Title:</label>
+            <input type="text" name="Title" required>
+        </div>
+        <div>
+            <label>Author:</label>
+            <input type="text" name="Author" required>
+        </div>
+        <!-- Add more fields as needed -->
+        <div>
+            <button type="submit">Add Book</button>
+        </div>
+    </form>
+</div>
